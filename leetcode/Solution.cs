@@ -26,8 +26,9 @@ namespace leetcode
             return rev;
         }
         
-        public bool IsPalindrome(int x) {
-        
+        public bool IsPalindrome(int x)
+        {
+            return x >= 0 && x == Reverse(x);
         }
     }
 }

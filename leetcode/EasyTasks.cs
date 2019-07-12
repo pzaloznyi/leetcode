@@ -24,5 +24,13 @@ namespace leetcode
         {
             _solution.Reverse(actual).Should().Be(expected);
         }
+
+        [Theory(DisplayName = "https://leetcode.com/problems/palindrome-number/description/")]
+        [InlineData(121, true)]
+        [InlineData(-121, false)]
+        public void IsPalindrome(int actual, bool expected)
+        {
+            _solution.IsPalindrome(actual).Should().Be(expected);
+        }
     }
 }
