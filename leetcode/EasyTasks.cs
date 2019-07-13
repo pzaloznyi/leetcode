@@ -16,6 +16,7 @@ namespace leetcode
             _solution = new Solution(_console);
         }
         
+        //
         [Theory(DisplayName = "https://leetcode.com/problems/reverse-integer/description/")]
         [InlineData(1, 1)]
         [InlineData(10, 1)]

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using leetcode.Entities;
 using Xunit.Abstractions;
 
@@ -119,6 +121,22 @@ namespace leetcode
             l1.next = AddTwoNumbers(l1.next, l2.next);
 
             return l1;
+        }
+        
+        public int LengthOfLongestSubstring(string s)
+        {
+            int n = s.Length, ans = 0;
+            Dictionary<char, int> map = new Dictionary<char, int>();
+
+            for (int j = 0, i = 0; j < n; j++) {
+                if (map.ContainsKey(s[j])) {
+                    i = Math.Max(map[s[j]], i);
+                }
+                ans = Math.Max(ans, j - i + 1);
+                map[s[j]] = j + 1;
+            }
+
+            return ans;
         }
     }
 }
