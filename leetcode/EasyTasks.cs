@@ -1,5 +1,5 @@
-using System;
 using FluentAssertions;
+using leetcode.Data;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -15,8 +15,8 @@ namespace leetcode
             _console = console;
             _solution = new Solution(_console);
         }
-        
-        //
+
+#region block1
         [Theory(DisplayName = "https://leetcode.com/problems/reverse-integer/description/")]
         [InlineData(1, 1)]
         [InlineData(10, 1)]
@@ -45,5 +45,13 @@ namespace leetcode
         {
             _solution.RomanToInt(actual).Should().Be(expected);
         }
+        
+        [Theory]
+        [ClassData(typeof(LongestCommonPrefixData))]
+        public void LongestCommonPrefix(string[] strs, string expected)
+        {
+            _solution.LongestCommonPrefix(strs).Should().Be(expected);
+        }
+#endregion
     }
 }
