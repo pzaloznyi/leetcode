@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using leetcode.Entities;
 using Xunit.Abstractions;
 
@@ -150,7 +151,35 @@ namespace leetcode
 
             return ans;
         }
-        
-        
+
+        public string Convert(string s, int numRows)
+        {
+            if (numRows == 1)
+                return s;
+            
+            var sb = new StringBuilder();
+            var n = s.Length;
+            var sections = Math.Ceiling((double) n / numRows);
+            var shift = numRows * 2 - 2;
+
+            for (var i = 0; i < numRows; i++)
+            {
+                for (var j = 0; j < sections; j++)
+                {
+                    var first = j * shift;
+                    var index = first + i;
+                    if (index >= n)
+                        continue;
+                    
+                    var length = first + shift;
+                    sb.Append(s[index]);
+                    var rowLength = length - i;
+                    if (rowLength < n && index > first && index < rowLength)
+                        sb.Append(s[rowLength]);
+                }
+            }
+
+            return sb.ToString();
+        }
     }
 }

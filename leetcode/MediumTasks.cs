@@ -17,7 +17,7 @@ namespace leetcode
             _solution = new Solution(_console);
         }
         
-        //
+#region 1
         [Theory(DisplayName = "https://leetcode.com/problems/add-two-numbers/")]
         [ClassData(typeof(AddTwoNumbersData))]
         public void AddTwoNumbers(ListNode l1, ListNode l2, ListNode expected)
@@ -31,5 +31,20 @@ namespace leetcode
         {
             _solution.LengthOfLongestSubstring(input).Should().Be(expected);
         }
+
+        [Theory(DisplayName = "https://leetcode.com/problems/zigzag-conversion/")]
+        [InlineData("PAYPALISHIRING", 2, "PYAIHRNAPLSIIG")]
+        [InlineData("PAYPALISHIRING", 3, "PAHNAPLSIIGYIR")]
+        [InlineData("PAYPALISHIRING", 4, "PINALSIGYAHRPI")]
+        [InlineData("PAYPALISHIRING", 5, "PHASIYIRPLIGAN")]
+        [InlineData("PAYPALISHIRING", 6, "PRAIIYHNPSGAIL")]
+        [InlineData("PAYP", 3, "PAPY")]
+        [InlineData("A", 2, "A")]
+        [InlineData("AB", 1, "AB")]
+        public void ZigZagConversion(string input, int rows, string output)
+        {
+            _solution.Convert(input, rows).Should().Be(output);
+        }
+#endregion
     }
 }
