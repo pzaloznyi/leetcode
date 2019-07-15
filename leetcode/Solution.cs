@@ -14,7 +14,7 @@ namespace leetcode
         {
             Console = console;
         }
-        
+
         public int Reverse(int x)
         {
             int rev = 0;
@@ -29,7 +29,7 @@ namespace leetcode
 
             return rev;
         }
-        
+
         public bool IsPalindrome(int x)
         {
             if (x < 0 || (x % 10 == 0 && x != 0))
@@ -46,7 +46,7 @@ namespace leetcode
 
             return x == revertedNumber || x == revertedNumber / 10;
         }
-        
+
         public int RomanToInt(string number)
         {
             var result = 0;
@@ -71,7 +71,7 @@ namespace leetcode
 
             return result;
         }
-        
+
         private static int RomanToDigit(char digit)
         {
             switch (digit)
@@ -86,26 +86,30 @@ namespace leetcode
                 default: return 0;
             }
         }
-        
-        public string LongestCommonPrefix(string[] strs) {
+
+        public string LongestCommonPrefix(string[] strs)
+        {
             if (strs == null || strs.Length == 0) return "";
-            for (var i = 0; i < strs[0].Length ; i++){
+            for (var i = 0; i < strs[0].Length; i++)
+            {
                 var c = strs[0][i];
-                for (var j = 1; j < strs.Length; j ++) {
+                for (var j = 1; j < strs.Length; j++)
+                {
                     if (i == strs[j].Length || strs[j][i] != c)
-                        return strs[0].Substring(0, i);             
+                        return strs[0].Substring(0, i);
                 }
             }
+
             return strs[0];
         }
-        
+
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
             if (l1 == null && l2 == null)
             {
                 return null;
             }
-            
+
             if (l1 == null)
             {
                 l1 = new ListNode(0);
@@ -117,7 +121,7 @@ namespace leetcode
             }
 
             l1.val += l2.val;
-            
+
             if (l1.val >= 10)
             {
                 l1.val %= 10;
@@ -127,24 +131,27 @@ namespace leetcode
                 }
                 else
                 {
-                    l1.next.val += 1;                    
+                    l1.next.val += 1;
                 }
             }
-            
+
             l1.next = AddTwoNumbers(l1.next, l2.next);
 
             return l1;
         }
-        
+
         public int LengthOfLongestSubstring(string s)
         {
             int n = s.Length, ans = 0;
             Dictionary<char, int> map = new Dictionary<char, int>();
 
-            for (int j = 0, i = 0; j < n; j++) {
-                if (map.ContainsKey(s[j])) {
+            for (int j = 0, i = 0; j < n; j++)
+            {
+                if (map.ContainsKey(s[j]))
+                {
                     i = Math.Max(map[s[j]], i);
                 }
+
                 ans = Math.Max(ans, j - i + 1);
                 map[s[j]] = j + 1;
             }
@@ -156,7 +163,7 @@ namespace leetcode
         {
             if (numRows == 1)
                 return s;
-            
+
             var sb = new StringBuilder();
             var n = s.Length;
             var sections = Math.Ceiling((double) n / numRows);
@@ -170,7 +177,7 @@ namespace leetcode
                     var index = first + i;
                     if (index >= n)
                         continue;
-                    
+
                     var length = first + shift;
                     sb.Append(s[index]);
                     var rowLength = length - i;
@@ -180,6 +187,25 @@ namespace leetcode
             }
 
             return sb.ToString();
+        }
+
+        public int MyAtoi(string str)
+        {
+            int index = 0, total = 0;
+            while (index < str.Length && str[index] == ' ') index++;
+            var sign = index < str.Length && (str[index] == '+' || str[index] == '-')
+                ? str[index++] == '+' ? 1 : -1
+                : 1;
+            while (index < str.Length)
+            {
+                int digit = str[index++] - '0';
+                if (digit < 0 || 9 < digit) break;
+                if (int.MaxValue / 10 < total || int.MaxValue / 10 == total && int.MaxValue % 10 < digit)
+                    return sign == -1 ? int.MinValue : int.MaxValue;
+                total = total * 10 + digit;
+            }
+
+            return total * sign;
         }
     }
 }

@@ -45,6 +45,19 @@ namespace leetcode
         {
             _solution.Convert(input, rows).Should().Be(output);
         }
+
+        [Theory]
+        [InlineData("42", 42)]
+        [InlineData("   -42", -42)]
+        [InlineData("4193 with words", 4193)]
+        [InlineData("words and 987", 0)]
+        [InlineData("-91283472332", -2147483648)]
+        [InlineData("91283472331", 2147483647)]
+        [InlineData("3.14159", 3)]
+        public void MyAtoi(string input, int expected)
+        {
+            _solution.MyAtoi(input).Should().Be(expected);
+        }
 #endregion
     }
 }
